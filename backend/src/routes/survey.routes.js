@@ -4,9 +4,9 @@ import {createSurvey, deleteSurvey, getAllData, getOneSurvey, updateSurvey} from
 const router = Router();
 
 router.get('/survey_data', getAllData)
-router.get('/survey_data/i', getOneSurvey)
+router.get('/survey_data/:id', getOneSurvey)
 router.post('/survey_data', createSurvey)
-router.delete('/survey_data', deleteSurvey)
-router.put('/survey_data', updateSurvey)
+router.delete('/survey_data/:id', deleteSurvey)
+router.put('/survey_data/:id', updateSurvey)
 
 export default router
