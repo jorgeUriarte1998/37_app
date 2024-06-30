@@ -18,5 +18,5 @@ export const delete_survey_query = (id) => {
 }
 
 export const update_survey_query = (id,age,gender,religion,random_number) => {
-    return `UPDATE ${table_name} SET age = ${age}, gender = '${gender}', religion = '${religion}', random_number = ${random_number} WHERE id = ${id};`
+    return `UPDATE ${table_name} SET age = ${age}, gender = '${gender}', religion = '${religion}', random_number = ${random_number} WHERE id = ${id} RETURNING *;`
 }
