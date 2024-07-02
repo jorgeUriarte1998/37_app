@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import {Button, Card, CardContent, Typography} from '@mui/material'
+import {Button, Card, CardContent, Typography, Box} from '@mui/material'
 import {useNavigate} from 'react-router-dom';
+import {backEndUris} from './utils/utils.js'
 
 export default function SurveyList() {
     const [surveys, setSurveys] = useState([])
     const navigate = useNavigate()
 
     const loadSurveys = async () => {
-        const response = await fetch('http://localhost:4000/survey_data/');
+        const response = await fetch(backEndUris.allSurveysData);
         const data = await response.json()
-        //console.log(data);
         setSurveys(data)
     }
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`http://localhost:4000/survey_data/${id}`,{
+            const res = await fetch(backEndUris.specificSurveyData(id),{
                 method:"DELETE"
             })
             setSurveys(surveys.filter(survey => survey.id !== id));
@@ -45,10 +45,45 @@ export default function SurveyList() {
                             justifyContent: 'space-between'
                         }}>
                             <div style={{color:'white'}}>
-                            <Typography>{survey.random_number}</Typography>
-                            <Typography>{survey.gender}</Typography>
-                            <Typography>{survey.age}</Typography>
-                            <Typography>{survey.religion}</Typography>
+                            <Typography>
+                                <Box 
+                                    component="span" 
+                                    fontWeight='fontWeightBold'
+                                    sx={{color:'#9BA0A0'}}
+                                >
+                                    Número Aleatorio: </Box>
+                                {survey.random_number}
+                            </Typography>
+
+                            <Typography>
+                                <Box 
+                                    component="span" 
+                                    fontWeight='fontWeightBold'
+                                    sx={{color:'#9BA0A0'}}
+                                >
+                                    Género: </Box>
+                                {survey.gender}
+                            </Typography>
+
+                            <Typography>
+                                <Box 
+                                    component="span" 
+                                    fontWeight='fontWeightBold'
+                                    sx={{color:'#9BA0A0'}}
+                                >
+                                    Edad: </Box>
+                                {survey.age}
+                            </Typography>
+
+                            <Typography>
+                                <Box 
+                                    component="span" 
+                                    fontWeight='fontWeightBold'
+                                    sx={{color:'#9BA0A0'}}
+                                >
+                                    Religión: </Box>
+                                {survey.religion}
+                            </Typography>
                             </div>
 
                             <div>

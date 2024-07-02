@@ -1,7 +1,7 @@
 import {React, useEffect, useState} from 'react'
 import {Box, Button, Card, CardContent, CircularProgress, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography} from '@mui/material'
 import {useNavigate, useParams} from 'react-router-dom'
-import {getTime_str} from './utils/utils.js'
+import {getTime_str, backEndUris} from './utils/utils.js'
 
 export default function SurveyForm() {
     const navigate = useNavigate();
@@ -11,7 +11,8 @@ export default function SurveyForm() {
     const params = useParams();
     
     const loadSurvey = async (id) => {
-        const res = await fetch(`http://localhost:4000/survey_data/${id}`);
+        const res = await fetch(backEndUris.specificSurveyData(id));
+        //const res = await fetch(`http://localhost:4000/survey_data/${id}`);
         const data = await res.json()
         setSurvey(
             {

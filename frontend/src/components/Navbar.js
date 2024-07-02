@@ -11,11 +11,24 @@ export default function Navbar() {
             <Container>
                 <Toolbar>
                     <Typography variant='h6' sx={{ flexGrow:1 }}>
-                        <Link to="/" style={{textDecoration:'none', color:'white'}}> PERN STACK </Link>
+                        <Link to="/" style={{textDecoration:'none', color:'white'}}> ENCUESTILLA </Link>
                     </Typography>
 
-                    <Button variant='contained' color='primary' onClick={() => navigate('/some/new')}>
-                        New Some 
+                    <Button 
+                        variant='contained' 
+                        color='primary' 
+                        sx={{margin:'6px'}}
+                        onClick={() => navigate('/survey/new')}
+                    >
+                        Nueva
+                    </Button>
+                    
+                    <Button 
+                        variant='contained' 
+                        color='primary' 
+                        onClick={() => navigate('/barchart')}
+                    >
+                        Estadísticas 
                     </Button>
                 </Toolbar>
             </Container>
