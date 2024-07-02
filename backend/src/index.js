@@ -1,6 +1,5 @@
 import express from 'express';
 import { PORT } from './config.js';
-import some from './routes/some.routes.js';
 import surveyRoutes from './routes/survey.routes.js'
 import morgan from 'morgan'
 import cors from 'cors'

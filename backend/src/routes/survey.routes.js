@@ -1,5 +1,9 @@
 import {Router} from 'express';
-import {createSurvey, deleteSurvey, getAllData, getOneSurvey, updateSurvey} from '../controllers/survey.controller.js'
+import {createSurvey, 
+        deleteSurvey, 
+        getAllData, 
+        getOneSurvey, 
+        updateSurvey} from '../controllers/survey.controller.js'
 
 const router = Router();
 
