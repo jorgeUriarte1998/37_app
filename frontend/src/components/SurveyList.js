@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Button, Card, CardContent, Typography, Box} from '@mui/material'
 import {useNavigate} from 'react-router-dom';
-import {backEndUris} from './utils/utils.js'
+import {backEndUris, request_headers} from './utils/utils.js'
 
 export default function SurveyList() {
     const [surveys, setSurveys] = useState([])
@@ -15,9 +15,7 @@ export default function SurveyList() {
 
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(backEndUris.specificSurveyData(id),{
-                method:"DELETE"
-            })
+            await fetch(backEndUris.specificSurveyData(id),request_headers("DELETE",{}))
             setSurveys(surveys.filter(survey => survey.id !== id));
         } catch (error) {
             console.log(error);

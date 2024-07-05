@@ -1,18 +1,23 @@
 import {React, useEffect, useState} from 'react'
-import {Box, Button, Card, CardContent, CircularProgress, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography} from '@mui/material'
+import {Box, 
+        Button, 
+        Card, 
+        CardContent, 
+        CircularProgress, 
+        FormControl, 
+        FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography} from '@mui/material'
 import {useNavigate, useParams} from 'react-router-dom'
-import {getTime_str, backEndUris} from './utils/utils.js'
+import {getTime_str, backEndUris, request_headers} from './utils/utils.js'
 
 export default function SurveyForm() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [editing,setEditing] = useState(false);
+    const [editing, setEditing] = useState(false);
 
     const params = useParams();
     
     const loadSurvey = async (id) => {
         const res = await fetch(backEndUris.specificSurveyData(id));
-        //const res = await fetch(`http://localhost:4000/survey_data/${id}`);
         const data = await res.json()
         setSurvey(
             {
@@ -41,26 +46,14 @@ export default function SurveyForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         survey.day_hour = getTime_str()
-        //setLoading(true)
+        setLoading(true)
         if (editing){
-            const res = await fetch(`http://localhost:4000/survey_data/${params.id}`,{
-                method:"PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(survey)
-            });
-            const data = await res.json()
+            await fetch(  backEndUris.specificSurveyData(params.id), request_headers('PUT',survey));
         }
         else{
-            /*const res = await fetch('http://localhost:4000/', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(task)
-        })
-        const data = await res.json()
-        console.log(data);*/
-        //console.log(task);
+            await fetch(backEndUris.allSurveysData,request_headers('POST',survey))
         }
-        //setLoading(false)
+        setLoading(false)
         navigate('/')
         
     };
@@ -86,6 +79,7 @@ export default function SurveyForm() {
                         <TextField
                             label='Número Aleatorio'
                             variant='filled'
+                            type="number"
                             sx={{
                                 display:'block',
                                 margin:'.5rem 0'
@@ -99,6 +93,7 @@ export default function SurveyForm() {
                         <TextField
                             label='Edad'
                             variant='filled'
+                            type="number"
                             sx={{
                                 display:'block',
                                 margin:'.5rem 0'
@@ -156,11 +151,13 @@ export default function SurveyForm() {
                                     name='religion'
                                     onChange={handleChange}
                                     value={survey.religion}
+                                    renderValue={(value) => <Typography color='white'>{value}</Typography>}
                                     MenuProps={
                                         {
                                         sx:{
                                             "& .MuiMenu-paper":{
-                                                backgroundColor: "black"
+                                                backgroundColor: "#222C2C",
+                                                color:'red'
                                             }}
                                         }
                                     }
@@ -175,7 +172,10 @@ export default function SurveyForm() {
                                     > Cristiana </MenuItem>
                                     <MenuItem value={'Judia'}
                                         sx={{ color: 'white' }}
-                                    > Judia </MenuItem>                                    
+                                    > Judia </MenuItem>    
+                                    <MenuItem value={'Ninguna'}
+                                        sx={{ color: 'white' }}
+                                    > Ninguna </MenuItem>                                 
                                 </Select> 
                             </FormControl>
                         </Box>
@@ -183,7 +183,8 @@ export default function SurveyForm() {
                         <Button variant='contained' 
                                 color='primary'
                                 type='submit'
-                                // disabled={!task.title || !task.description}
+                                sx={{margin:'20px'}}
+                                disabled={!survey.age || !survey.gender || !survey.random_number || !survey.religion }
                                 >
                             {loading ? (<CircularProgress
                                 color='inherit' 

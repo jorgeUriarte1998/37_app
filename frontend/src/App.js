@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import {Container} from '@mui/material'
 import SurveyList from './components/SurveyList' 
 import SurveyForm from './components/SurveyForm'
-import {BarChart} from './components/BarChart'
+import BarChart from './components/BarChart'
 //import React, { useState } from 'react'
 //import Axios from 'axios'
 

@@ -66,3 +66,8 @@ export const updateSurvey = async (req,res,next) => {
         next(error);   
     }
 };
+
+export const getRandomNumberOccurrencies = async (req,res,next) => {
+    const result = await pool.query('SELECT random_number, COUNT(*) FROM survey GROUP BY random_number ORDER BY random_number ASC')
+    return res.json(result.rows)
+ }

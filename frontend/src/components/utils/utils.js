@@ -1,4 +1,5 @@
-const BACKEND_URI_ROOT = `http://localhost:4000/survey_data/`
+const BACKEND_URI_ROOT = `http://localhost:4000/`
+const SURVEY_DATA_SECTION = 'survey_data/'
 
 export const getTime_str = () => {
     const date = new Date();
@@ -12,8 +13,17 @@ const convert_to_two_digits = (time_value) => {
 }
 
 export const backEndUris = {
-    allSurveysData: BACKEND_URI_ROOT,
-    specificSurveyData: (id) => {return BACKEND_URI_ROOT+id},
+    allSurveysData: BACKEND_URI_ROOT+SURVEY_DATA_SECTION,
+    specificSurveyData: (id) => {return BACKEND_URI_ROOT+SURVEY_DATA_SECTION+id},
+    barchartData: BACKEND_URI_ROOT+'barchartData/'
+}
+
+export const request_headers = (method, data) => {
+    return {
+        method:method,
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    }
 }
 
 export const survey_obj = {
