@@ -15,7 +15,7 @@ app.use(surveyRoutes);
 
 app.use((err, req, res, next) => {
     return res.json({
-        message: err.message
+        errorMessage: err.message
     })
 });
 
