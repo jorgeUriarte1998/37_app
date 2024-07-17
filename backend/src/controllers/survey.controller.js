@@ -5,6 +5,14 @@ import {create_new_record_query,
         delete_survey_query,
         update_survey_query} from './sql_utils/sql_queries.js'
 
+export const mainRoute = async (req,res,next) => {
+    try {
+        res.send('HELLO!!!!')
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const getAllData = async (req,res,next) => {
     try {
         const result = await pool.query(get_all_records_query())

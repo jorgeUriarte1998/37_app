@@ -4,9 +4,12 @@ import {createSurvey,
         getAllData, 
         getOneSurvey, 
         getRandomNumberOccurrencies, 
+        mainRoute, 
         updateSurvey} from '../controllers/survey.controller.js'
 
 const router = Router();
+
+router.get('/', mainRoute)
 
 router.get('/survey_data', getAllData)
 router.get('/survey_data/:id', getOneSurvey)
