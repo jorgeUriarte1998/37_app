@@ -1,4 +1,5 @@
-const BACKEND_URI_ROOT = `http://localhost:4000/`
+//const BACKEND_URI_ROOT = `http://localhost:4000/`
+const BACKEND_URI_ROOT = `https://three7-app.onrender.com/`
 const SURVEY_DATA_SECTION = 'survey_data/'
 
 export const getTime_str = () => {
