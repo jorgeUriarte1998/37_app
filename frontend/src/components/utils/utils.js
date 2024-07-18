@@ -1,4 +1,3 @@
-//const BACKEND_URI_ROOT = `http://localhost:4000/`
 const BACKEND_URI_ROOT = 'https://three7-app.onrender.com/'
 const SURVEY_DATA_SECTION = 'survey_data/'
 
@@ -34,3 +33,4 @@ export const survey_obj = {
     religion: '',
     day_hour: ''
 }
+//https://37-app-frontend.vercel.app/
